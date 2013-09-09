@@ -11,7 +11,10 @@ use Plack::App::File;
 
 autoflush STDOUT 1;
 
-my $pwm_value_file = '/sys/class/gpio/gpio11/value';
+my $gpio_cmd = '/usr/local/bin/gpio';
+my $gpio_pin = '1';
+
+system($gpio_cmd, 'mode', $gpio_pin, 'pwm');
 
 my $index_document = Plack::App::File->new( file => 'root/index.html')->to_app;
 
@@ -25,17 +28,11 @@ my $pwm_control = sub {
     $value = 0 if ($value <= 0);
     $value = 1023 if ($value > 1023);
 
+    system($gpio_cmd, 'pwm', $gpio_pin, $value);
+
     my $res = $req->new_response(200);
     $res->content_type('application/json');
-
-    my $fh = new IO::File '> '.$pwm_value_file;
-    if (defined $fh) {
-        print $fh $value."\n";
-        $fh->close;	
-        $res->body('{"result": "ok"}');
-    } else {
-        $res->body('{"result": "fail"}');
-    }
+    $res->body('{"result": "ok"}');
     $res->finalize;
 };
 
