@@ -1,0 +1,3 @@
+#!/bin/sh
+echo 11 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio11/direction
