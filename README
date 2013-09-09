@@ -8,3 +8,11 @@ to increase root size
     apt-get install git
 
 
+
+    curl -L http://cpanmin.us | perl - --sudo App::cpanminus
+
+
+    cpanm --sudo PSGI Plack
+    cpanm --sudo IO::File Plack::Builder Plack::Middleware::Header Plack::Middleware::Static
+    cpanm --sudo Plack::Middleware::Deflater Plack::Request Plack::App::File
+    cpanm --sudo Plack::Middleware::ReverseProxy
