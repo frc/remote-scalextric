@@ -1,0 +1,10 @@
+Run
+    raspi-config
+to increase root size
+
+
+    apt-get install nginx
+    apt-get install emacs
+    apt-get install git
+
+
