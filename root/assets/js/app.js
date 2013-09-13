@@ -1,7 +1,7 @@
 requirejs.config({
-	baseUrl: '../assets/js/vendor',
+	baseUrl: '/assets/js/vendor',
 	paths: {
-		sub: '../sub'
+		sub: '/assets/js/sub'
 	}
 });
 

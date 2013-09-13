@@ -41,7 +41,7 @@ builder {
         $pwm_control;
     };
 
-    mount "/" => builder {
+    mount "/assets" => builder {
         enable 'ReverseProxy';
         enable 'ConditionalGET';
 
@@ -49,8 +49,16 @@ builder {
                 content_type => ['text/css','text/html','text/javascript',
                 'application/javascript'], vary_user_agent => 1;
 
-	enable 'Static',
-          path => qr{^/(images|js|css)/}, root => 'root';
+	enable 'Static', path => qr{^/}, root => 'root/assets';
+    };
+
+    mount "/" => builder {
+        enable 'ReverseProxy';
+        enable 'ConditionalGET';
+
+        enable 'Deflater',
+                content_type => ['text/css','text/html','text/javascript',
+                'application/javascript'], vary_user_agent => 1;
 
 	$index_document;
     };
