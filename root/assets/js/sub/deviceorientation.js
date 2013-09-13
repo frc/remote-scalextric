@@ -10,17 +10,9 @@ define(function() {
 
 	function sendData(data) {
 		var xhr = new XMLHttpRequest();
-
-		xhr.open('POST', '/set-pwm.json', true); // TODO
-
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState === 4 && xhr.status === 200) {
-				console.log('message');
-				// Do something if you feel like it
-			}
-		}
-		
-		xhr.send('v=' + data); // TODO
+		xhr.open('GET', '/set-pwm.json?v=' + data, true); // TODO
+		xhr.send();
+	    console.log('v=' + data);
 	}
 
 	function deviceOrientationHandler(event) {
@@ -29,8 +21,7 @@ define(function() {
 
 		if (tilt > 0 && tilt < 200) {
 			scale.style.top = 100 - tilt + '%';
-			// sendData(tilt); // TODO
-			console.log('doajax');
+			sendData(tilt);
 		}
 	}
 
